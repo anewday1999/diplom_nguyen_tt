@@ -13,20 +13,6 @@ import seaborn as sns
 from sklearn import preprocessing
 from sklearn.utils import shuffle
 
-def downsample(df:pd.DataFrame, label_col_name:str) -> pd.DataFrame:
-    # find the number of observations in the smallest group
-    nmin = df[label_col_name].value_counts().min()
-    return (df
-            # split the dataframe per group
-            .groupby(label_col_name)
-            # sample nmin observations from each group
-            .apply(lambda x: x.sample(nmin))
-            # recombine the dataframes
-            .reset_index(drop=True)
-            )
-
-
-
 def oversample(df):
     print("=======")
     classes = df.Y.value_counts().to_dict()
